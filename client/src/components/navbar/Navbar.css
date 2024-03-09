@@ -16,6 +16,11 @@
 
 .logo {
     font-weight: 500;
+    color: white;
+
+}
+.logo:hover {
+    text-decoration: underline;
 }
 
 .navButton {

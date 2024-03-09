@@ -1,6 +1,7 @@
+import { Link } from 'react-router-dom'
 import './searchItem.css'
 
-const SearchItem = () => {
+const SearchItem = ({item}) => {
   return (
     <div className='searchItem'>
         <img
@@ -9,8 +10,8 @@ const SearchItem = () => {
              alt=""
          />
          <div className="siDesc">
-            <h1 className="siTitle">Tower Street Apartments</h1>
-            <span className="siDistance">500m from center</span>
+            <h1 className="siTitle">{item.title}</h1>
+            <span className="siDistance">{item.distance}m from center</span>
             <span className="siTaxiOp">Free airport taxi</span>
             <span className="siSubtitle">
                 Studio Apartment with Air conditioning
@@ -24,14 +25,17 @@ const SearchItem = () => {
             </span>
          </div>
          <div className="siDetails">
+            {item.rating && 
             <div className='siRating'>
                 <span>Excellent</span>
                 <button>8.9</button>
-            </div>
+            </div>}
             <div className="siDetailTaxes">
-                <span className="siPrice">$123</span>
+                <span className="siPrice">${item.cheapestPrice}</span>
                 <span className="siTaxOp">Include taxes and fees</span>
-                <button className='siCheckButton'>See Availablity</button>
+                <Link to={`/hotels/${item._id}`}>
+                    <button className='siCheckButton'>See Availablity</button>
+                </Link>
             </div>
          </div>
     </div>

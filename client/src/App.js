@@ -6,6 +6,7 @@ import {
 import Home from './pages/home/Home';
 import Hotels from './pages/hotel/Hotels';
 import List from './pages/list/List';
+import Login from './pages/login/Login';
 
 
 function App() {
@@ -15,6 +16,7 @@ function App() {
         <Route path="/" element={<Home />} />
         <Route path="/hotels" element={<List />} />
         <Route path="/hotels/:id" element={<Hotels />} />
+        <Route path="/login" element={<Login />} />
       </Routes>
     </BrowserRouter>
   );

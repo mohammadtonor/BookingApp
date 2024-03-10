@@ -26,7 +26,6 @@ const SearchReducer = (state, action) => {
 //Search contexr provider
 export const SearchProvider = ({ children }) => {
     const [state, dispatch] = useReducer(SearchReducer, INITIAL_STATE);
-    console.log(state.city);
     
     useEffect(() => {
         localStorage.setItem('search', JSON.stringify({

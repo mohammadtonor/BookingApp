@@ -7,7 +7,6 @@ import { useState } from 'react';
 
 const New = ({inputs, title}) => {
   const [file, setFile] = useState("");
-
   return (
     <div className='new'>
       <Sidebar />
@@ -18,7 +17,13 @@ const New = ({inputs, title}) => {
         </div>
         <div className="bottom">
           <div className="left">
-            <img src='https://icon-library.com/images/no-image-icon/no-image-icon-0.jpg' alt=''/>
+            <img 
+              src={file 
+                    ? URL.createObjectURL(file)
+                    : "https://icon-library.com/images/no-image-icon/no-image-icon-0.jpg"    
+              } 
+              alt=''
+            />
           </div>
           <div className="right">
             <form>
@@ -30,7 +35,7 @@ const New = ({inputs, title}) => {
                   type="file"
                   id='file' 
                   style={{display: 'none'}}
-                  onChange={(e) => setFile(e.target.value)}
+                  onChange={(e) => setFile(e.target.files[0])}
                 />
               </div>
               {inputs.map((input) => (

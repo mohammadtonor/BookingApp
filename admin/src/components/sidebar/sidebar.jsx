@@ -1,4 +1,5 @@
-import './sidebar.scss'
+import './sidebar.scss';
+import {Link} from 'react-router-dom'
 import DashboardIcon from "@mui/icons-material/Dashboard";
 import PermIdentityIcon from '@mui/icons-material/PermIdentity';
 import CreditCardIcon from "@mui/icons-material/CreditCard";
@@ -28,8 +29,10 @@ const Sidebar = () => {
                     <span>Dashboard</span>
                 </li>
                 <li>
-                    <PermIdentityIcon className='icon'/>
-                    <span>Users</span>
+                    <Link to={'/users'}>
+                        <PermIdentityIcon className='icon'/>
+                        <span>Users</span>
+                    </Link>
                 </li>
                 <li>
                     <StoreIcon className='icon'/>

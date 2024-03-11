@@ -9,10 +9,10 @@ router.post('/', verifyUser, createHotel);
 router.put('/:id', verifyAdmin, updateHotel);
 
 router.delete('/:id', verifyAdmin, deleteHotel);
+router.get('/', getAllHotel);
 
 router.get('/find/:id', getByIdHotel);
 
-router.get('/', getAllHotel);
 
 router.get('/', getAllHotel);
 

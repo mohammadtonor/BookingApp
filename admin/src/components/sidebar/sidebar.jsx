@@ -43,9 +43,9 @@ const Sidebar = () => {
                     </Link>
                 </li>
                 <li>
-                    <Link to={'/products'}>
+                    <Link to={'/hotels'}>
                         <StoreIcon className='icon'/>
-                        <span>Products</span>
+                        <span>Hotels</span>
                     </Link>
                 </li>
                 <li>
@@ -53,8 +53,10 @@ const Sidebar = () => {
                     <span>Orders</span>
                 </li>
                 <li>
-                    <LocalShippingIcon className='icon'/>
-                    <span>Delivery</span>
+                    <Link to={'/rooms'}>
+                        <LocalShippingIcon className='icon'/>
+                        <span>Delivery</span>
+                    </Link>
                 </li>
                 <p className="title">USEFULL</p>
                 <li>

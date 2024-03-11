@@ -1,4 +1,4 @@
-import React, { useContext } from 'react'
+import  { useContext } from 'react'
 import { useState } from 'react'
 import { AuthContext } from '../../context/AuthContext';
 import './login.css'
@@ -34,7 +34,6 @@ const Login = () => {
     }
   }
   
-  console.log(error);
   return (
     <div className='login'>
       <div className='lContainer'>

@@ -1,56 +1,72 @@
-import { Link } from 'react-router-dom';
-import { userColumns, userRows } from '../../dataTableSource';
-import './datatable.scss'
-import { DataGrid, GridColDef, GridValueGetterParams } from '@mui/x-data-grid';
-import { useState } from 'react';
+import "./datatable.scss";
+import { DataGrid } from "@mui/x-data-grid";
+import { userColumns, userRows } from "../../dataTableSource";
+import { Link, useLocation } from "react-router-dom";
+import { useEffect, useState } from "react";
+import useFetch from "../../hooks/useFetch";
+import axios from "axios";
 
+const Datatable = ({columns}) => {
+  const location = useLocation();
+  const path = location.pathname.split("/")[1];
+  const [list, setList] = useState([]);
+  const { data, loading, error } = useFetch(`/${path}`);
 
-const DataTable = () => {
-  const [data, setData] = useState(userRows);
+  useEffect(() => {
+    setList(data);
+  }, [data]);
 
-  const handleDelete = (id) => {
-    setData(data.filter(data => data.id !== id));
-  }
+  const handleDelete = async (id) => {
+    try {
+      await axios.delete(`/${path}/${id}`);
+      setList(list.filter((item) => item._id !== id));
+    } catch (err) {}
+  };
 
   const actionColumn = [
     {
-        field: "action",
-        headerName: "Actions",
-        width: 200,
-        renderCell: (params) => {
-            return (
-                <div className='cellAction'>
-                  <Link to={'/users/test'}>
-                    <div className='viewButton'>View</div>
-                  </Link>
-                    <div className='deleteButton' onClick={() => handleDelete(params.row.id)}>Delete</div>
-                </div>
-            )
-        }
-    }
-  ]
+      field: "action",
+      headerName: "Action",
+      width: 200,
+      renderCell: (params) => {
+        return (
+          <div className="cellAction">
+            <Link to={`{/${path}/${params._id}}`} style={{ textDecoration: "none" }}>
+              <div className="viewButton">View</div>
+            </Link>
+            <div
+              className="deleteButton"
+              onClick={() => handleDelete(params.row._id)}
+            >
+              Delete
+            </div>
+          </div>
+        );
+      },
+    },
+  ];
+
+  
+
   return (
-    <div className='datatable'>
-      <div className='datatableTitle'>
-        <span>Add New User</span>
-        <Link to='/users/new'>
+    <div className="datatable">
+      <div className="datatableTitle">
+        {path}
+        <Link to={`/${path}/new`} className="link">
           Add New
         </Link>
       </div>
-     <DataGrid
+      <DataGrid
         className="datagrid"
-        rows={data}
-        columns={userColumns.concat(actionColumn)}
-        initialState={{
-          pagination: {
-            paginationModel: { page: 0, pageSize: 9 },
-          },
-        }}
-        pageSizeOptions={[5, 10]}
+        rows={list}
+        columns={columns.concat(actionColumn)}
+        pageSize={9}
+        rowsPerPageOptions={[9]}
         checkboxSelection
+        getRowId={(row) => row._id}
       />
     </div>
-  )
-}
+  );
+};
 
-export default DataTable
+export default Datatable;

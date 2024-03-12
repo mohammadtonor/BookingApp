@@ -11,7 +11,7 @@ const Login = () => {
     password: undefined
   });
   const navigate = useNavigate();
-
+console.log(credentials);
   const {loading, error, dispatch} = useContext(AuthContext);
 
   const handleChange = (event) => {
@@ -27,6 +27,7 @@ const Login = () => {
 
     try {
       const res = await axios.post('/auth/login', credentials);
+      console.log(res.data);
       if(res.data.isAdmin) {
         dispatch({ type: 'LOGIN_SUCCESS', payload: res.data.details });
         navigate('/')

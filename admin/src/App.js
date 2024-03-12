@@ -9,13 +9,14 @@ import Login from "./page/login/Login";
 import List from "./page/list/List";
 import Single from "./page/single/Single";
 import New from "./page/new/New";
-import { hotelInputs, productInputs, userInputs } from './formSource';
+import { hotelInputs, roomInputs, userInputs } from './formSource';
 import './style/style.scss'
 import { useContext, useState } from 'react';
 import {DarkModeContext} from './context/darkModeContext'
 import { AuthContext } from './context/AuthContext';
-import { hotelColumns, userColumns } from './dataTableSource';
+import { hotelColumns, roomColumns, userColumns } from './dataTableSource';
 import NewHotel from './page/newHotel/NewHotel';
+import NewRoom from './page/newRoom/NewRoom';
 
 function App() {
   const { darkMode} = useContext(DarkModeContext)
@@ -87,15 +88,44 @@ function App() {
                 path="new"
                 element={
                   <ProtectedRoute>  
-                  <NewHotel
-                    inputs={hotelInputs}
-                    title={"Add new Hotel"}
-                  />
+                    <NewHotel
+                      inputs={hotelInputs}
+                      title={"Add new hotel"}
+                    />
                 </ProtectedRoute>
                 }
               />
               <Route 
                 path=":hotelId"
+                element={
+                  <ProtectedRoute>
+                    <Single />
+                  </ProtectedRoute>
+                }
+              />
+            </Route>
+            <Route path="rooms">
+              <Route 
+                index
+                element={
+                   <ProtectedRoute> 
+                      <List columns={roomColumns}/>
+                  </ProtectedRoute>
+                } 
+              />
+              <Route
+                path="new"
+                element={
+                  <ProtectedRoute>  
+                    <NewRoom
+                      inputs={roomInputs}
+                      title={"Add new Room"}
+                    />
+                </ProtectedRoute>
+                }
+              />
+              <Route 
+                path=":roomId"
                 element={
                   <ProtectedRoute>
                     <Single />

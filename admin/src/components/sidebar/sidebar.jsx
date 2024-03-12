@@ -49,8 +49,10 @@ const Sidebar = () => {
                     </Link>
                 </li>
                 <li>
-                    <CreditCardIcon className='icon'/>
-                    <span>Orders</span>
+                    <Link to={'/rooms'}>
+                        <CreditCardIcon className='icon'/>
+                        <span>Rooms</span>
+                    </Link>
                 </li>
                 <li>
                     <Link to={'/rooms'}>
